@@ -15,7 +15,11 @@ public:
 	UI(LiquidCrystal* lcd);
 	virtual ~UI();
 	void setDisplaySize(uint8_t cols, uint8_t rows);
-	void print(const String&);
+	template<class T> void print(T s) {
+		lcd_->clear();
+		lcd_->setCursor(0, 0);
+		lcd_->print(s);
+	}
 private:
 	LiquidCrystal* const lcd_;
 };

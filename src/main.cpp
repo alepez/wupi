@@ -20,13 +20,20 @@ int sec = 0;
 void setup() {
 	ui.setDisplaySize(8, 2);
 	ui.print("camera");
+	pinMode(15, INPUT);
 }
 
 void loop() {
-	int s = millis() / 1000;
+	const int ms = millis();
+	const int s = ms / 1000;
 	if ((s != sec) && (s % 2 == 0)) {
 		sec = s;
 		canon.photoNow();
+	}
+	if (ms % 250 == 0) {
+		int btnVInt = analogRead(15);
+		float btnV = btnVInt / 1024.0f;
+		ui.print(btnVInt);
 	}
 }
 
